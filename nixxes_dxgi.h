@@ -3,7 +3,8 @@
 #include "nixxes_shared.h"
 
 #include <cstdint>
-#include <dxgi.h>
+
+struct IDXGISwapChain3;
 
 namespace nx {
     class INxDXGI {
@@ -21,7 +22,7 @@ namespace nx {
         virtual void INxDXGI_Unk38() = 0;
         virtual void SetColorSpace() = 0;
         virtual void INxDXGI_Unk48() = 0;
-        virtual void Present() = 0;
+        virtual bool Present(void *) = 0;
         virtual void INxDXGI_Unk58() = 0;
         virtual void INxDXGI_Unk60() = 0;
         virtual void INxDXGI_Unk68() = 0;
@@ -42,10 +43,12 @@ namespace nx {
     class NxDXGIImpl : public INxDXGI {
     public:
         uint8_t Unk08[0x28];
-        IDXGISwapChain *SwapChain;
-        uint8_t Unk38[0xB8];
+        IDXGISwapChain3 *SwapChain;
+        uint32_t NumBuffers;
+        uint8_t Unk38[0xB4];
     };
 
     assert_size(NxDXGIImpl, 0xF0);
     assert_offset(NxDXGIImpl, SwapChain, 0x30);
+    assert_offset(NxDXGIImpl, NumBuffers, 0x38);
 }

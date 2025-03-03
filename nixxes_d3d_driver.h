@@ -3,7 +3,8 @@
 #include "nixxes_shared.h"
 
 #include <cstdint>
-#include <d3d12.h>
+
+struct ID3D12Device;
 
 namespace nx {
     class INxD3DDriver {

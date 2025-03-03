@@ -4,7 +4,11 @@
 #include "nixxes_d3d_driver.h"
 
 #include <cstdint>
-#include <d3d12.h>
+
+struct ID3D12CommandQueue;
+struct ID3D12Device;
+struct ID3D12Resource;
+struct NxD3D12Driver;
 
 namespace nx {
     class INxD3D {
@@ -40,9 +44,9 @@ namespace nx {
         virtual void SetCanCreateDx11_1_Device() = 0;
         virtual void GetBackBufferCount() = 0;
         virtual void INxD3D_UnkD8() = 0;
-        virtual void INxD3D_UnkE0() = 0;
+        virtual ID3D12Device *GetDevice() = 0;
         virtual void INxD3D_UnkE8() = 0;
-        virtual void INxD3D_UnkF0() = 0;
+        virtual ID3D12Resource* GetBackBuffer(uint32_t index) = 0;
         virtual void INxD3D_UnkF8() = 0;
         virtual void INxD3D_Unk100() = 0;
         virtual ID3D12CommandQueue *GetCommandQueue(uint32_t index) = 0;
